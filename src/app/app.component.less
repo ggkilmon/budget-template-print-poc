@@ -1,0 +1,58 @@
+.screen-container {
+  width: fit-content;
+  display: block;
+}
+
+.print-container {
+  display: none;
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 10px;
+  justify-items: center;
+  background-color: darkgrey;
+}
+
+@media print {
+  @page {
+    size: letter;
+  }
+
+  .controls {
+    display: none;
+  }
+
+  .screen-container {
+    display: none;
+  }
+
+  .print-container {
+    display: block;
+
+    .page {
+      break-after: page;
+      height: 10.5in;
+      margin: 0;
+
+      .items-container {
+        height: 80%;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+
+        grid-template-columns: unset;
+        row-gap: unset;
+        justify-items: unset;
+      }
+    }
+
+    .page:last-child {
+      break-after: unset;
+    }
+  }
+}
